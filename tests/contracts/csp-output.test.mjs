@@ -28,7 +28,7 @@ const headers = await readFile(path.join(outDir, "_headers"), "utf8");
 
 test("the exported site ships a _headers file for every route", () => {
   assert.match(headers, /^\/\*\n/);
-  assert.match(headers, /^ {2}Content-Security-Policy(-Report-Only)?: /m);
+  assert.match(headers, /^ {2}Content-Security-Policy: /m);
 });
 
 test("every executable inline script in the export is allowed by hash", async () => {

@@ -37,7 +37,8 @@ test("hashes every executable inline script across all exported pages", async ()
     assert.ok(!headers.includes(cspHash('{"x":1}')));
     assert.ok(!headers.includes(cspHash("ignored()")));
     assert.match(headers, /connect-src 'self' https:\/\/contact\.jopy\.dev;/);
-    assert.match(headers, /^ {2}Content-Security-Policy-Report-Only: /m);
+    assert.match(headers, /^ {2}Content-Security-Policy: /m);
+    assert.doesNotMatch(headers, /Report-Only/);
   } finally {
     await rm(dir, { recursive: true, force: true });
   }

@@ -9,9 +9,9 @@ import {
   cspHash,
 } from "./security-headers.mjs";
 
-// Report-Only until staging proves Turnstile, analytics, hydration and motion
-// run clean; switched to "enforce" before the production release.
-export const CSP_MODE = "report-only";
+// Enforced: staging and the live edge ran Turnstile, hydration and motion with
+// zero violations in Chromium, Firefox and WebKit under Report-Only first.
+export const CSP_MODE = "enforce";
 
 async function htmlFiles(dir) {
   const found = [];
