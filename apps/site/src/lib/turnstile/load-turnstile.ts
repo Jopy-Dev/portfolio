@@ -7,7 +7,7 @@ export type TurnstileRenderOptions = {
   sitekey: string;
   action: string;
   theme: "dark";
-  size: "flexible";
+  size: "normal";
   "response-field": false;
   callback: (token: string) => void;
   "expired-callback": () => void;

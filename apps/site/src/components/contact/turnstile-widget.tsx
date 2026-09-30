@@ -56,7 +56,7 @@ function useTurnstile(
         sitekey,
         action: TURNSTILE_ACTION,
         theme: "dark",
-        size: "flexible",
+        size: "normal",
         "response-field": false,
         callback: (token) => latest.current.onToken(token),
         "expired-callback": invalidate,
