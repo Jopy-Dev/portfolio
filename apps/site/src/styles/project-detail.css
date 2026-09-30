@@ -1,0 +1,237 @@
+.project-detail {
+  position: relative;
+  /* Project entry owns scroll position; pin layout must not shift its anchor. */
+  overflow-anchor: none;
+  z-index: var(--z-content);
+  padding-block: 7rem var(--section-block);
+}
+
+.project-detail__back {
+  display: inline-flex;
+  min-height: var(--touch-target);
+  align-items: center;
+  gap: var(--spacing-2);
+  margin-bottom: clamp(3rem, 8vw, 7rem);
+  text-decoration: none;
+}
+
+.project-detail__back span {
+  transition: translate 250ms ease;
+}
+
+.project-detail__back:is(:hover, :focus-visible) span {
+  translate: -0.18rem 0;
+}
+
+.project-detail__header,
+.project-detail__facts,
+.project-detail__gallery {
+  width: min(100%, 50rem);
+  margin-inline: auto;
+}
+
+.project-detail__info {
+  min-height: calc(100svh - 100px);
+}
+
+.project-detail__info:focus-within {
+  /* biome-ignore lint/complexity/noImportantStyles: keyboard focus must override scroll-driven inline blur. */
+  filter: none !important;
+  /* biome-ignore lint/complexity/noImportantStyles: focused links must remain visible despite scroll-driven opacity. */
+  opacity: 1 !important;
+}
+
+.project-detail__features {
+  display: grid;
+  gap: var(--spacing-4);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.project-detail__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--spacing-5);
+}
+
+.project-detail__header h1 {
+  /* 16ch + balance keeps long titles on two even lines from ~462px up. */
+  max-width: 16ch;
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(3.5rem, 8vw, 4.5rem);
+  font-weight: 400;
+  letter-spacing: -0.025em;
+  line-height: 0.96;
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+
+.project-detail__links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: var(--spacing-3);
+}
+
+.project-detail__links a {
+  display: inline-flex;
+  min-height: var(--touch-target);
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.project-detail__links svg {
+  width: 1.1rem;
+  height: 1.1rem;
+}
+
+.project-detail__facts {
+  display: grid;
+  gap: 0;
+  margin-top: clamp(3rem, 7vw, 6rem);
+}
+
+.project-detail__facts > div {
+  display: grid;
+  grid-template-columns: minmax(9rem, 0.35fr) minmax(0, 1fr);
+  gap: var(--spacing-5);
+  padding-block: var(--spacing-5);
+  border-top: var(--border-hairline) solid var(--color-border-subtle);
+}
+
+.project-detail__facts dt {
+  color: var(--color-text-muted);
+  font-family: var(--font-display);
+  text-transform: uppercase;
+}
+
+.project-detail__facts dd {
+  max-width: 70ch;
+  margin: 0;
+  white-space: pre-line;
+}
+
+.project-detail__gallery {
+  position: relative;
+  display: grid;
+  gap: var(--spacing-1);
+  margin-top: clamp(4rem, 9vw, 8rem);
+}
+
+.project-detail__gallery a {
+  position: relative;
+  display: block;
+  aspect-ratio: 750 / 400;
+  overflow: hidden;
+  background: var(--color-surface-raised);
+}
+
+.project-detail__gallery img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 50%;
+}
+
+.project-detail__image-open {
+  position: absolute;
+  top: var(--spacing-3);
+  right: var(--spacing-3);
+  display: grid;
+  width: var(--spacing-6);
+  height: var(--spacing-6);
+  place-items: center;
+  background: var(--color-canvas);
+  color: var(--color-text-primary);
+  opacity: 0;
+  transition: opacity var(--duration-fast) var(--ease-project-transition);
+}
+
+.project-detail__image-open svg {
+  width: var(--spacing-4);
+  height: var(--spacing-4);
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+}
+
+.project-detail__gallery
+  a:is(:hover, :focus-visible)
+  .project-detail__image-open {
+  opacity: 1;
+}
+
+.project-detail__image-open:hover {
+  background: var(--color-brand-signal);
+  color: var(--color-ink-on-menu);
+}
+
+.project-image-viewer {
+  width: 100vw;
+  height: 100svh;
+  max-width: none;
+  max-height: none;
+  padding: 0;
+  border: 0;
+  margin: 0;
+  background: var(--color-canvas);
+}
+
+.project-image-viewer::backdrop {
+  background: var(--color-canvas);
+}
+
+.project-image-viewer__close {
+  display: grid;
+  width: 100%;
+  height: 100%;
+  place-items: center;
+  padding: var(--spacing-3);
+  border: 0;
+  background: transparent;
+  cursor: zoom-out;
+}
+
+.project-image-viewer__image {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: calc(100svh - 2rem);
+  object-fit: contain;
+}
+
+@media (hover: none), (pointer: coarse), (prefers-reduced-motion: reduce) {
+  .project-detail__image-open {
+    opacity: 1;
+  }
+}
+
+@media (max-width: 56.25rem) {
+  .project-detail {
+    width: min(calc(100% - 2.5rem), 48rem);
+  }
+
+  .project-detail__header {
+    display: grid;
+  }
+
+  .project-detail__links {
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 40rem) {
+  .project-detail {
+    width: min(calc(100% - 2rem), 36rem);
+    padding-top: 6.5rem;
+  }
+
+  .project-detail__facts > div {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-2);
+  }
+}

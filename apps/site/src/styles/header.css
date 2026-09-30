@@ -1,0 +1,283 @@
+.site-header {
+  position: fixed;
+  z-index: var(--z-header);
+  top: 0;
+  left: 0;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-5) clamp(1.25rem, 4vw, 4rem);
+  pointer-events: none;
+}
+
+.site-header > * {
+  pointer-events: auto;
+}
+
+.wordmark {
+  display: inline-flex;
+  align-items: baseline;
+  color: var(--color-text-primary);
+  font-size: var(--text-wordmark);
+  font-synthesis: weight;
+  font-weight: 700;
+  text-decoration: none;
+  transform: translateX(0);
+  opacity: 1;
+  visibility: visible;
+  transition:
+    transform 420ms var(--ease-editorial),
+    opacity var(--duration-fast) ease,
+    visibility 0s linear;
+  transition-delay: 0s;
+}
+
+/* Tap area of at least 44px without changing the visible box, whose
+   rectangle drives the title-overlap hide/return geometry. */
+.wordmark {
+  position: relative;
+}
+
+.wordmark::after {
+  position: absolute;
+  top: 50%;
+  inset-inline: 0;
+  height: max(100%, 2.75rem);
+  content: "";
+  translate: 0 -50%;
+}
+
+.wordmark__name {
+  font-family: var(--font-wordmark);
+  font-size: 1em;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.wordmark__punctuation {
+  font-family: var(--font-body);
+  font-size: 1em;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.wordmark[data-wordmark-visible="false"] {
+  transform: translateX(calc(100vw + 100%));
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition-delay: 0s, 100ms, 420ms;
+}
+
+.wordmark[data-menu-open="true"] {
+  transform: translateX(0);
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transition: none;
+  transition-delay: 0s;
+}
+
+.wordmark[data-menu-settling="true"] {
+  transition: none;
+  transition-delay: 0s;
+}
+
+.menu-toggle {
+  position: relative;
+  width: 3rem;
+  height: 3rem;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.menu-toggle span {
+  position: absolute;
+  right: 0.45rem;
+  width: 1.55rem;
+  height: 0.12rem;
+  background: var(--color-text-primary);
+  transition:
+    transform var(--duration-control) ease,
+    top var(--duration-control) ease,
+    background var(--duration-fast) ease;
+}
+
+.menu-toggle span:first-child {
+  top: 1.16rem;
+}
+
+.menu-toggle span:last-child {
+  top: 1.72rem;
+}
+
+.menu-toggle:hover span:first-child {
+  transform: rotate(8deg);
+}
+
+.menu-toggle:hover span:last-child {
+  transform: rotate(-8deg);
+}
+
+.menu-toggle[aria-expanded="true"] span {
+  top: 1.45rem;
+  background: var(--color-ink-on-menu);
+}
+
+.menu-toggle[aria-expanded="true"] span:first-child {
+  transform: rotate(45deg);
+}
+
+.menu-toggle[aria-expanded="true"] span:last-child {
+  transform: rotate(-45deg);
+}
+
+.menu-open .site-header {
+  z-index: calc(var(--z-menu) + 1);
+}
+
+.menu-open .wordmark,
+.menu-open .menu-toggle {
+  color: var(--color-ink-on-menu);
+}
+
+.site-header[data-menu-exiting="true"] .menu-toggle span {
+  background: var(--color-ink-on-menu);
+}
+
+.menu-layer {
+  position: fixed;
+  z-index: var(--z-menu);
+  inset: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: visibility 0s linear var(--duration-reveal);
+}
+
+.menu-layer.is-open {
+  visibility: visible;
+  pointer-events: auto;
+  transition-delay: 0s;
+}
+
+.menu-backdrop {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  border: 0;
+  background: var(--color-overlay-backdrop);
+  opacity: 0;
+  transition: opacity var(--duration-fast) ease;
+}
+
+.menu-layer.is-open .menu-backdrop {
+  opacity: 1;
+}
+
+.menu-panel {
+  position: relative;
+  display: flex;
+  min-height: 12rem;
+  align-items: flex-end;
+  padding: 5.5rem clamp(1.5rem, 4vw, 4rem) 1.25rem;
+  background: var(--color-brand-menu);
+  color: var(--color-ink-on-menu);
+  clip-path: inset(0 0 0 100%);
+  transition: clip-path var(--duration-reveal) var(--ease-editorial);
+}
+
+.menu-layer.is-open .menu-panel {
+  clip-path: inset(0);
+}
+
+.menu-panel ul {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  /* Minimum only: space-between sets the gap once the row has room; a
+     smaller floor keeps all five links in view at the 901px desktop start. */
+  gap: var(--spacing-3);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.menu-panel li {
+  opacity: 0;
+  transform: translateX(1rem);
+  transition:
+    opacity var(--duration-fast) ease,
+    transform 320ms var(--ease-editorial);
+}
+
+.menu-layer.is-open .menu-panel li {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.menu-layer.is-open .menu-panel li:nth-child(1) {
+  transition-delay: 90ms;
+}
+
+.menu-layer.is-open .menu-panel li:nth-child(2) {
+  transition-delay: 125ms;
+}
+
+.menu-layer.is-open .menu-panel li:nth-child(3) {
+  transition-delay: 160ms;
+}
+
+.menu-layer.is-open .menu-panel li:nth-child(4) {
+  transition-delay: 195ms;
+}
+
+.menu-layer.is-open .menu-panel li:nth-child(5) {
+  transition-delay: 230ms;
+}
+
+.menu-panel a {
+  display: inline-flex;
+  min-height: var(--touch-target);
+  align-items: center;
+  gap: var(--spacing-2);
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 3.4vw, 4rem);
+  line-height: 1;
+  text-decoration: none;
+}
+
+.menu-panel a::before {
+  width: 0.55rem;
+  height: 0.55rem;
+  flex: 0 0 auto;
+  border-radius: var(--radius-round);
+  background: currentColor;
+  content: "";
+  transition: scale var(--duration-fast) ease;
+}
+
+.menu-panel a:is(:hover, :focus-visible)::before {
+  scale: 1.8;
+}
+
+.menu-panel svg {
+  width: 1.1em;
+  height: 1.1em;
+  fill: none;
+  opacity: 0;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2;
+  transition:
+    opacity var(--duration-fast) ease,
+    translate var(--duration-fast) ease;
+}
+
+.menu-panel a:is(:hover, :focus-visible) svg {
+  opacity: 1;
+  translate: 0.2em -0.2em;
+}

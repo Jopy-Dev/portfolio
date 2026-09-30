@@ -1,0 +1,45 @@
+import type { Metadata } from "next";
+import type { ReactNode } from "react";
+import { MotionLifecycleProvider } from "@/components/motion/motion-lifecycle-provider";
+import { PageTransition } from "@/components/motion/page-transition";
+import { SITE_ORIGIN } from "@/lib/site";
+import "./globals.css";
+
+const SITE_TITLE = "Mark Jommer | Full-stack Engineer & AI Automation Engineer";
+const SITE_DESCRIPTION =
+  "Full-stack engineer in Metro Manila building production-grade web applications, secure backend systems, and AI-driven automation.";
+
+export const metadata: Metadata = {
+  metadataBase: new URL(SITE_ORIGIN),
+  title: SITE_TITLE,
+  description: SITE_DESCRIPTION,
+  alternates: { canonical: "/" },
+  icons: { icon: "data:," },
+  openGraph: {
+    type: "website",
+    url: SITE_ORIGIN,
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+    siteName: "Jopy Dev",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+  },
+};
+
+export default function RootLayout({
+  children,
+}: Readonly<{ children: ReactNode }>) {
+  return (
+    <html lang="en">
+      <body>
+        <MotionLifecycleProvider>
+          <PageTransition />
+          {children}
+        </MotionLifecycleProvider>
+      </body>
+    </html>
+  );
+}

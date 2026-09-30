@@ -1,0 +1,105 @@
+{
+  "$schema": "../../node_modules/wrangler/config-schema.json",
+  "name": "contact-worker",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-09-26",
+  "workers_dev": false,
+  "preview_urls": false,
+  // Top level = local development only; staging/production environments are
+  // defined separately and never inherit the testing-key allowance.
+  "vars": {
+    "ALLOWED_ORIGIN": "http://localhost:3000",
+    "TURNSTILE_EXPECTED_HOSTNAME": "example.com",
+    "TURNSTILE_EXPECTED_ACTION": "portfolio_contact",
+    "TURNSTILE_ALLOW_TESTING_KEY": "true"
+  },
+  "secrets": {
+    "required": [
+      "TURNSTILE_SECRET_KEY",
+      "CONTACT_DESTINATION",
+      "RATE_LIMIT_HMAC_SECRET"
+    ]
+  },
+  "send_email": [
+    {
+      "name": "CONTACT_EMAIL",
+      "allowed_sender_addresses": ["contact@jopy.dev"]
+    }
+  ],
+  "durable_objects": {
+    "bindings": [
+      { "name": "CONTACT_RATE_LIMITER", "class_name": "ContactRateLimiter" }
+    ]
+  },
+  "migrations": [{ "tag": "v1", "new_sqlite_classes": ["ContactRateLimiter"] }],
+  // Bindings, vars and secrets are not inherited by named environments, so
+  // each one restates them; every environment gets its own limiter storage.
+  "env": {
+    "staging": {
+      "routes": [
+        { "pattern": "contact-staging.jopy.dev", "custom_domain": true }
+      ],
+      "vars": {
+        "ALLOWED_ORIGIN": "http://localhost:4173",
+        "TURNSTILE_EXPECTED_HOSTNAME": "example.com",
+        "TURNSTILE_EXPECTED_ACTION": "portfolio_contact",
+        "TURNSTILE_ALLOW_TESTING_KEY": "true"
+      },
+      "secrets": {
+        "required": [
+          "TURNSTILE_SECRET_KEY",
+          "CONTACT_DESTINATION",
+          "RATE_LIMIT_HMAC_SECRET"
+        ]
+      },
+      "send_email": [
+        {
+          "name": "CONTACT_EMAIL",
+          "allowed_sender_addresses": ["contact@jopy.dev"]
+        }
+      ],
+      "durable_objects": {
+        "bindings": [
+          { "name": "CONTACT_RATE_LIMITER", "class_name": "ContactRateLimiter" }
+        ]
+      },
+      "observability": {
+        "enabled": true,
+        "logs": { "invocation_logs": false }
+      }
+    },
+    "production": {
+      "routes": [{ "pattern": "contact.jopy.dev", "custom_domain": true }],
+      "vars": {
+        "ALLOWED_ORIGIN": "https://portfolio.jopy.dev",
+        "TURNSTILE_EXPECTED_HOSTNAME": "portfolio.jopy.dev",
+        "TURNSTILE_EXPECTED_ACTION": "portfolio_contact",
+        "TURNSTILE_ALLOW_TESTING_KEY": "false"
+      },
+      "secrets": {
+        "required": [
+          "TURNSTILE_SECRET_KEY",
+          "CONTACT_DESTINATION",
+          "RATE_LIMIT_HMAC_SECRET"
+        ]
+      },
+      "send_email": [
+        {
+          "name": "CONTACT_EMAIL",
+          "allowed_sender_addresses": ["contact@jopy.dev"]
+        }
+      ],
+      "durable_objects": {
+        "bindings": [
+          { "name": "CONTACT_RATE_LIMITER", "class_name": "ContactRateLimiter" }
+        ]
+      },
+      // Application logs only: invocation logs would add per-request metadata
+      // the PII-free logger deliberately avoids.
+      "observability": {
+        "enabled": true,
+        "logs": { "invocation_logs": false }
+      }
+    }
+  }
+}

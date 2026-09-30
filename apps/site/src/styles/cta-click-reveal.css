@@ -1,0 +1,100 @@
+.cta-click-reveal {
+  --cta-exit-y: -150%;
+  --cta-entry-y: 100%;
+  --cta-fill-skew: 12deg;
+  position: absolute;
+  z-index: 3;
+  inset: 0;
+  overflow: hidden;
+  border-radius: inherit;
+  pointer-events: none;
+  background: var(--color-canvas);
+  line-height: 1;
+}
+
+.cta-click-reveal[data-direction="down"] {
+  --cta-exit-y: 150%;
+  --cta-entry-y: -100%;
+  --cta-fill-skew: -12deg;
+}
+
+.cta-click-reveal__word,
+.cta-click-reveal__incoming,
+.cta-click-reveal__fill {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  animation-duration: var(--duration-cta-flip);
+  animation-timing-function: var(--ease-cta-flip);
+  animation-fill-mode: both;
+}
+
+.cta-click-reveal__word {
+  color: var(--color-text-primary);
+  background: var(--color-canvas);
+  animation-name: cta-word-out;
+}
+
+.cta-click-reveal__incoming {
+  color: var(--color-ink-on-menu);
+  animation-name: cta-chevron-in;
+}
+
+.cta-click-reveal__fill {
+  background: var(--color-brand-signal);
+  animation-name: cta-fill-in;
+}
+
+.cta-click-reveal__chevrons {
+  position: relative;
+  width: var(--cta-chevron-size);
+  height: var(--cta-chevron-size);
+}
+
+.cta-click-reveal[data-direction="up"] .cta-click-reveal__chevrons {
+  transform: rotate(180deg);
+}
+
+@keyframes cta-word-out {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(var(--cta-exit-y));
+  }
+}
+
+@keyframes cta-chevron-in {
+  from {
+    transform: translateY(var(--cta-entry-y));
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes cta-fill-in {
+  from {
+    transform: translateY(var(--cta-entry-y)) skewY(var(--cta-fill-skew))
+      scaleY(0);
+  }
+  to {
+    transform: translateY(0) skewY(var(--cta-fill-skew)) scale(1.5);
+  }
+}
+
+@media (forced-colors: active) {
+  .cta-click-reveal,
+  .cta-click-reveal__word {
+    background: Canvas;
+    color: CanvasText;
+  }
+  .cta-click-reveal__incoming {
+    color: HighlightText;
+  }
+  .cta-click-reveal__fill {
+    background: Highlight;
+    forced-color-adjust: none;
+  }
+}

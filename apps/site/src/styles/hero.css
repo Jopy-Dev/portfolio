@@ -1,0 +1,307 @@
+.hero {
+  display: grid;
+  min-height: 100svh;
+  grid-template-columns: minmax(0, 1fr) minmax(13rem, 18rem);
+  align-items: center;
+  gap: clamp(3rem, 9vw, 10rem);
+  width: min(calc(100% - 18rem), var(--container-hero));
+  margin-inline: auto;
+  padding-block: clamp(8rem, 13vh, 10rem) 6rem;
+}
+
+.hero__content {
+  position: relative;
+  z-index: 1;
+  align-self: center;
+  translate: 0 -0.75rem;
+}
+
+.hero-arrow-shell {
+  position: absolute;
+  z-index: 0;
+  bottom: 5rem;
+  left: 50%;
+  width: min(23.5rem, 48vw);
+  color: var(--color-text-primary);
+  pointer-events: none;
+  transform: translateX(-50%);
+}
+
+.hero-arrow {
+  display: block;
+  width: 100%;
+  height: auto;
+  fill: currentColor;
+  fill-opacity: 0;
+}
+
+.hero-arrow path {
+  stroke: var(--color-border-subtle);
+  stroke-width: 1;
+}
+
+.hero__title {
+  max-width: 8ch;
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: var(--text-hero);
+  font-weight: 400;
+  letter-spacing: -0.025em;
+  line-height: 0.96;
+  text-transform: uppercase;
+}
+
+.hero__title span {
+  display: block;
+  white-space: nowrap;
+}
+
+.hero__title span:first-child {
+  color: var(--color-brand-signal);
+}
+
+.hero__identity {
+  display: grid;
+  margin-top: 2.25rem;
+  color: var(--color-text-muted);
+  font-size: 1.1rem;
+  line-height: 1.55;
+}
+
+.hero__identity strong {
+  color: var(--color-text-primary);
+  font-size: 1.25rem;
+}
+
+.hero__action {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--spacing-4) var(--spacing-5);
+  margin-top: var(--spacing-5);
+}
+
+.liquid-button {
+  --liquid-button-width: 13rem;
+  position: relative;
+  display: inline-flex;
+  width: var(--liquid-button-width);
+  min-height: 4.6rem;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 0 1rem;
+  border: var(--border-hairline) solid var(--color-brand-signal);
+  border-radius: var(--radius-round);
+  color: var(--color-text-primary);
+  font-family: var(--font-display);
+  letter-spacing: 0.12em;
+  text-decoration: none;
+  text-transform: uppercase;
+  transform: scale(1);
+  transition:
+    color var(--duration-fast) ease,
+    transform var(--duration-press-release) var(--ease-editorial);
+}
+
+.liquid-button__fill {
+  position: absolute;
+  z-index: 0;
+  top: 50%;
+  left: 20%;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: var(--color-brand-signal);
+  transform: translate(-50%, -50%) scale(1);
+  transition: transform var(--duration-cta-hover) var(--ease-editorial);
+}
+
+.liquid-button__label,
+.liquid-button__label--hover {
+  position: relative;
+  z-index: 1;
+  transition:
+    color var(--duration-cta-hover) var(--ease-editorial),
+    opacity var(--duration-cta-hover) var(--ease-editorial),
+    transform var(--duration-cta-hover) var(--ease-editorial);
+}
+
+.liquid-button__outline {
+  position: absolute;
+  z-index: 4;
+  inset: 0;
+  border: 0.125rem solid var(--color-text-primary);
+  border-radius: inherit;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--duration-fast) ease;
+}
+
+.liquid-button:is(:hover, :focus-visible, :active, .is-activated)
+  .liquid-button__outline {
+  opacity: 1;
+  transition-delay: var(--duration-hero-outline-delay);
+}
+
+.liquid-button__label--rest {
+  transform: translateX(0);
+}
+
+.liquid-button__label--hover {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: var(--color-ink-on-menu);
+  opacity: 0;
+  transform: translateX(4rem);
+}
+
+.liquid-button:is(:hover, :focus-visible, :active) .liquid-button__fill {
+  transform: translate(-50%, -50%) scale(44);
+}
+
+.liquid-button.is-activated .liquid-button__fill {
+  transform: translate(-50%, -50%) scale(44);
+}
+
+.liquid-button:is(:hover, :focus-visible, :active) .liquid-button__label--rest {
+  opacity: 0;
+  transform: translateX(4rem);
+}
+
+.liquid-button:is(:hover, :focus-visible, :active)
+  .liquid-button__label--hover {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.liquid-button.is-activated .liquid-button__label--rest,
+.liquid-button.is-activated .liquid-button__label--hover {
+  opacity: 0;
+  transition: none;
+}
+
+.availability {
+  display: flex;
+  flex-basis: 100%;
+  align-items: center;
+  gap: 0.65rem;
+  margin: -0.85rem 0 0;
+  color: var(--color-text-primary);
+  font-size: 0.92rem;
+}
+
+.availability span {
+  width: 0.65rem;
+  height: 0.65rem;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  background: var(--color-text-primary);
+}
+
+.hero__proof {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  align-self: center;
+  gap: clamp(2.2rem, 4vh, 3rem);
+  margin: 0;
+  text-align: right;
+  translate: 0 2rem;
+}
+
+.hero__proof div {
+  display: grid;
+}
+
+.hero__proof dt {
+  color: var(--color-brand-signal);
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 4vw, 4rem);
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+
+.hero__proof dd {
+  margin: 0.45rem 0 0;
+  color: var(--color-text-primary);
+  font-size: 0.92rem;
+}
+
+.section-cue {
+  position: fixed;
+  z-index: var(--z-section-navigator);
+  bottom: calc(1rem + env(safe-area-inset-bottom));
+  left: 50%;
+  display: grid;
+  width: 4.75rem;
+  height: 4.75rem;
+  padding: 0;
+  place-content: center;
+  justify-items: center;
+  background: var(--color-canvas);
+  border-radius: 50%;
+  color: var(--color-text-primary);
+  font-size: 0.9rem;
+  line-height: 1;
+  text-decoration: none;
+  translate: -50% 0;
+}
+
+.section-cue__icon {
+  display: grid;
+}
+
+.section-cue__outline {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  border: 0.125rem solid var(--color-text-primary);
+  border-radius: inherit;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.section-cue[data-direction="up"] .section-cue__icon {
+  transform: rotate(180deg);
+}
+
+.section-cue__icon svg {
+  width: 2.4rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  animation: cue-drift 1.6s var(--ease-editorial) infinite;
+}
+
+.section-cue__content {
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+  animation: cue-state-in 420ms var(--ease-editorial);
+}
+
+@keyframes cue-state-in {
+  from {
+    clip-path: inset(100% 0 0);
+    filter: blur(0.15rem);
+    translate: 0 0.6rem;
+    opacity: 0;
+  }
+
+  to {
+    clip-path: inset(0);
+    filter: blur(0);
+    translate: 0;
+    opacity: 1;
+  }
+}
+
+@keyframes cue-drift {
+  50% {
+    translate: 0 0.5rem;
+    opacity: 0.35;
+  }
+}

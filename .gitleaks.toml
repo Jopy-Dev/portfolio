@@ -1,0 +1,12 @@
+title = "Jopy Dev portfolio Gitleaks configuration"
+
+[extend]
+useDefault = true
+
+[[allowlists]]
+description = "Generated, local-only, dependency, and user-SVG paths"
+paths = [
+  '''(^|/)(node_modules|\.next|out|test-results)/''',
+  '''^sample/''',
+  '''^apps/site/public/assets/icons/skills/''',
+]

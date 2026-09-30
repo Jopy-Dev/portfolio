@@ -1,0 +1,25 @@
+Jopy Dev Portfolio third-party notices
+
+Fonts
+-----
+Anton
+Copyright 2020 The Anton Project Authors (https://github.com/googlefonts/AntonFont.git)
+Source package: @fontsource/anton 5.3.0
+License: SIL Open Font License 1.1; see OFL-1.1.txt.
+
+Campana Script
+Designer: Mans Greback.
+Source: https://www.dafont.com/campana-script.font
+Original file: CampanaScript_PERSONAL_USE_ONLY.otf; copied unchanged.
+License: PERSONAL USE ONLY; supplied terms retained at
+apps/site/public/assets/fonts/CampanaScript-LICENSE.txt.
+
+Alex Brush (previous wordmark; retained unused asset)
+Copyright 2011 The Alex Brush Project Authors (https://github.com/googlefonts/alex-brush)
+Source package: @fontsource/alex-brush 5.3.0
+License: SIL Open Font License 1.1; see OFL-1.1.txt.
+
+Roboto Flex
+Copyright 2017 The Roboto Flex Project Authors (https://github.com/googlefonts/roboto-flex)
+Source package: @fontsource-variable/roboto-flex 5.3.0
+License: SIL Open Font License 1.1; see OFL-1.1.txt.

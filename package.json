@@ -1,0 +1,35 @@
+{
+  "name": "jopy-dev-portfolio",
+  "version": "0.0.0",
+  "private": true,
+  "packageManager": "npm@12.0.2",
+  "engines": {
+    "node": ">=24.15.0 <25",
+    "npm": ">=12 <13"
+  },
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "npm run dev --workspace @jopy-dev/site",
+    "build": "npm run build --workspace @jopy-dev/site",
+    "build:deploy": "npm run build && node scripts/guards/check-deploy-config.mjs",
+    "format": "npm exec biome format --write .",
+    "format:check": "npm exec biome format .",
+    "lint": "npm exec biome lint .",
+    "check": "npm exec biome check .",
+    "check:fix": "npm exec biome check --write .",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "test": "node --test tests/contracts/*.test.mjs packages/contact-contract/test/*.test.ts && npm run test --workspace @jopy-dev/contact-worker",
+    "guard:tokens": "node scripts/guards/check-design-tokens.mjs",
+    "guard:env": "node scripts/guards/check-env-parity.mjs",
+    "guard:static": "node scripts/guards/verify-static-contracts.mjs",
+    "guard:public": "node scripts/guards/check-public-bundle.mjs",
+    "verify": "npm run format:check && npm run lint && npm run typecheck && npm run guard:tokens && npm run guard:env && npm run build && npm run guard:static && npm run test && npm run guard:public"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "4.13.0",
+    "playwright-core": "1.59.1"
+  }
+}

@@ -1,0 +1,106 @@
+@font-face {
+  font-family: "Anton";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/assets/fonts/anton-latin-400.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Campana Script";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/assets/fonts/CampanaScript_PERSONAL_USE_ONLY.otf")
+    format("opentype");
+}
+
+@font-face {
+  font-family: "Roboto Flex";
+  font-style: normal;
+  font-weight: 100 1000;
+  font-display: swap;
+  src: url("/assets/fonts/roboto-flex-latin-wght.woff2")
+    format("woff2-variations");
+}
+
+@theme {
+  --color-canvas: #212121;
+  --color-brand-signal: #00f050;
+  --color-brand-menu: #2fc36f;
+  --color-text-primary: #f5f5f2;
+  --color-text-muted: #adada8;
+  --color-border-subtle: #454541;
+  --color-surface-raised: #292927;
+  --color-preloader-panel: #171715;
+  --color-particle: #ffffff;
+  --color-cursor-neutral: #ffffff;
+  --color-cursor-floor: rgb(214.22 214.22 214.22);
+  --color-cursor-restore: rgb(40.78 40.78 40.78);
+  --color-cursor-pivot: rgb(145.88 105.59 128.5845);
+  --color-cursor-window: rgb(98.79 139.08 116.0855);
+  --color-cursor-gain: rgb(11.667173 82.15811 47.921166);
+  --color-cursor-curve: rgb(127.5 242.735281 140.495868);
+  --color-bubble-fill: #e6f1f7;
+  --color-bubble-stroke: #3a92c5;
+  --color-overlay-backdrop: rgb(0 0 0 / 68%);
+  --color-danger: #ff6b6b;
+  --color-ink-on-menu: #111111;
+  --font-display: "Anton", sans-serif;
+  --font-body: "Roboto Flex", sans-serif;
+  --font-wordmark: "Campana Script", cursive;
+  --text-hero: clamp(5.5rem, 8.8vw, 8.8rem);
+  --text-section: clamp(3rem, 6vw, 6rem);
+  --text-wordmark: 3.15rem;
+  --text-preloader: 20vw;
+  --text-profile-statement: clamp(1.75rem, 2.5vw, 2.5rem);
+  --tracking-preloader: 0.025em;
+  --text-contact-intro: clamp(1.75rem, 3.2vw, 3.25rem);
+  --spacing-1: 0.5rem;
+  --spacing-2: 0.75rem;
+  --spacing-3: 1rem;
+  --spacing-4: 1.5rem;
+  --spacing-5: 2rem;
+  --spacing-6: 3rem;
+  --spacing-7: 4.5rem;
+  --spacing-8: 7rem;
+  --radius-round: 999rem;
+  --ease-editorial: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-project-transition: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-cta-flip: cubic-bezier(0.4, 0, 0.2, 1);
+  --duration-fast: 180ms;
+  --duration-press: 120ms;
+  --duration-press-release: 220ms;
+  --duration-cue-outline: 500ms;
+  --duration-hero-outline-delay: 150ms;
+  --duration-contact-outline-delay: 210ms;
+  --duration-control: 300ms;
+  --duration-cta-hover: 300ms;
+  --duration-cta-flip: 500ms;
+  --duration-contact-fill: 420ms;
+  --duration-viewport-enter: 480ms;
+  --duration-viewport-exit: 360ms;
+  --duration-reveal: 700ms;
+}
+
+:root {
+  --container-public: 86rem;
+  --container-hero: 88rem;
+  --section-block: clamp(8rem, 14vw, 14rem);
+  --border-hairline: 0.0625rem;
+  --focus-width: 0.1875rem;
+  --focus-offset: 0.3125rem;
+  --touch-target: 2.75rem;
+  --cta-chevron-size: 2rem;
+  --press-scale: 0.96;
+  --z-particles: 0;
+  --z-content: 10;
+  --z-progress: 12;
+  --z-section-navigator: 14;
+  --z-header: 40;
+  --z-cursor-trail: 41;
+  --z-cursor: 51;
+  --z-menu: 50;
+  --z-preloader: 100;
+  --z-skip-link: 101;
+}
