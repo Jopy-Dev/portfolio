@@ -1,7 +1,7 @@
 const assert = require("node:assert/strict");
 const { mkdir, writeFile } = require("node:fs/promises");
 const playwright = require(process.argv[2]);
-const { isReportOnlyNotice, launchOptions } = require("./browser-env.cjs");
+const { launchOptions } = require("./browser-env.cjs");
 const base = "http://127.0.0.1:4173";
 const output = process.env.BROWSER_TEST_OUTPUT || "test-results/route-arrival";
 
@@ -99,8 +99,7 @@ async function runContext(
   const errors = [];
   page.on("pageerror", (error) => errors.push(error.message));
   page.on("console", (entry) => {
-    if (entry.type() === "error" && !isReportOnlyNotice(entry.text()))
-      errors.push(entry.text());
+    if (entry.type() === "error") errors.push(entry.text());
   });
   page.on("response", (response) => {
     if (response.status() >= 400)

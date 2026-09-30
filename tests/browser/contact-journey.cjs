@@ -8,7 +8,7 @@ const { mkdir, writeFile } = require("node:fs/promises");
 const path = require("node:path");
 const playwright = require(process.argv[2]);
 const {
-  isReportOnlyNotice,
+  isTurnstileFrameNoise,
   isTurnstileInternal,
   launchOptions,
 } = require("./browser-env.cjs");
@@ -111,7 +111,7 @@ async function openContact(browser, width, scenario) {
       (text.includes(endpoint) &&
         text.includes("CORS request did not succeed"));
     if (expected.aborted && resetNotice) return;
-    if (isReportOnlyNotice(text)) return;
+    if (isTurnstileFrameNoise(text)) return;
     if (isTurnstileInternal(entry.location().url)) return;
     record.failures.push(`console: ${text}`);
   });

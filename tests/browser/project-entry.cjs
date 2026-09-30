@@ -1,7 +1,7 @@
 const assert = require("node:assert/strict");
 const { mkdir, writeFile } = require("node:fs/promises");
 const pw = require(process.argv[2]);
-const { isReportOnlyNotice, launchOptions } = require("./browser-env.cjs");
+const { launchOptions } = require("./browser-env.cjs");
 const base = "http://127.0.0.1:4173";
 const projectTitle = process.argv[4] || "TopSpin";
 const output =
@@ -130,8 +130,7 @@ async function checkLinks(page, reference) {
         const errors = [];
         page.on("pageerror", (error) => errors.push(error.message));
         page.on("console", (entry) => {
-          if (entry.type() === "error" && !isReportOnlyNotice(entry.text()))
-            errors.push(entry.text());
+          if (entry.type() === "error") errors.push(entry.text());
         });
         page.on("response", (response) => {
           if (response.status() >= 400)

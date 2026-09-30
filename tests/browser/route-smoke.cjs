@@ -7,7 +7,7 @@ const { mkdir, writeFile } = require("node:fs/promises");
 const path = require("node:path");
 const playwright = require(process.argv[2]);
 const {
-  isReportOnlyNotice,
+  isTurnstileFrameNoise,
   isTurnstileInternal,
   launchOptions,
 } = require("./browser-env.cjs");
@@ -45,12 +45,15 @@ const PLANS = {
 function watch(page, route) {
   const failures = [];
   const documentUrl = `${base}${route.path}`;
-  page.on("pageerror", (error) => failures.push(`pageerror: ${error.message}`));
+  page.on("pageerror", (error) => {
+    if (isTurnstileFrameNoise(error.message)) return;
+    failures.push(`pageerror: ${error.message}`);
+  });
   page.on("console", (entry) => {
     if (entry.type() !== "error") return;
     // The browser logs the intentional not-found document status as an error.
     if (route.status === 404 && entry.text().includes("404")) return;
-    if (isReportOnlyNotice(entry.text())) return;
+    if (isTurnstileFrameNoise(entry.text())) return;
     if (isTurnstileInternal(entry.location().url)) return;
     failures.push(`console: ${entry.text()}`);
   });
@@ -63,6 +66,7 @@ function watch(page, route) {
     failures.push(`requestfailed: ${request.url()} ${error}`);
   });
   page.on("response", (response) => {
+    if (isTurnstileInternal(response.url())) return;
     const expected =
       response.url() === documentUrl ? route.status : response.status() < 400;
     if (expected === true || expected === response.status()) return;

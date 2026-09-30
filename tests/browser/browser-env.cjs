@@ -16,21 +16,32 @@ function launchOptions(engine) {
   return { headless: true };
 }
 
-// WebKit reports these at error level while the policy ships report-only;
-// they disappear once the header is enforced.
-const REPORT_ONLY_NOTICES = [
-  "is ignored when delivered in a report-only policy",
-  "was delivered in report-only mode, but does not specify a 'report-to'",
+const TURNSTILE_HOST = "challenges.cloudflare.com";
+
+// Turnstile's own challenge frame loads, probes, and fails subresources on the
+// Cloudflare host (e.g. a 401 token probe, blob URLs, unreachable mirrors) while
+// the widget still issues a token. None of it is this site's traffic.
+function isTurnstileInternal(url) {
+  try {
+    const { host, protocol, pathname } = new URL(url);
+    const target = protocol === "blob:" ? new URL(pathname).host : host;
+    return target === TURNSTILE_HOST || target.endsWith(`.${TURNSTILE_HOST}`);
+  } catch {
+    return false;
+  }
+}
+
+// Messages raised inside the challenge frame that browsers report without a
+// source URL: WebKit's cross-origin frame guard and Firefox rejecting a font
+// the widget requests. Anything else still fails the run.
+const TURNSTILE_FRAME_NOISE = [
+  // WebKit may report only the tail of this SecurityError message.
+  /challenges\.cloudflare\.com" from accessing a frame with origin/,
+  /downloadable font: .*font-family: "Cambria Math"/,
 ];
 
-function isReportOnlyNotice(text) {
-  return REPORT_ONLY_NOTICES.some((notice) => text.includes(notice));
+function isTurnstileFrameNoise(text) {
+  return TURNSTILE_FRAME_NOISE.some((pattern) => pattern.test(text));
 }
 
-// WebKit fails a blob resource inside Turnstile's own challenge frame even on
-// a bare page without this site's headers; the widget still issues a token.
-function isTurnstileInternal(url) {
-  return url.startsWith("blob:https://challenges.cloudflare.com/");
-}
-
-module.exports = { isReportOnlyNotice, isTurnstileInternal, launchOptions };
+module.exports = { isTurnstileFrameNoise, isTurnstileInternal, launchOptions };
