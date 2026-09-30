@@ -6,6 +6,20 @@
   src: url("/assets/fonts/anton-latin-400.woff2") format("woff2");
 }
 
+/* Sized to Anton's advance width and line metrics so text keeps its footprint
+   until the web font arrives; a wider fallback overflows phone screens and the
+   swap then shifts the whole layout. */
+@font-face {
+  font-family: "Anton Fallback";
+  src:
+    local("Arial"), local("Helvetica"), local("Roboto"),
+    local("Liberation Sans");
+  size-adjust: 70.46%;
+  ascent-override: 167.5%;
+  descent-override: 46.8%;
+  line-gap-override: 0%;
+}
+
 @font-face {
   font-family: "Campana Script";
   font-style: normal;
@@ -46,7 +60,7 @@
   --color-overlay-backdrop: rgb(0 0 0 / 68%);
   --color-danger: #ff6b6b;
   --color-ink-on-menu: #111111;
-  --font-display: "Anton", sans-serif;
+  --font-display: "Anton", "Anton Fallback", sans-serif;
   --font-body: "Roboto Flex", sans-serif;
   --font-wordmark: "Campana Script", cursive;
   --text-hero: clamp(5.5rem, 8.8vw, 8.8rem);
