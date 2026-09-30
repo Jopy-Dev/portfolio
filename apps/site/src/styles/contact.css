@@ -105,6 +105,10 @@
 
 .turnstile-shell {
   display: flex;
+  /* Cloudflare's standard widget is a fixed 300px frame; matching it keeps the
+     loading placeholder the same width as the widget that replaces it. */
+  width: 100%;
+  max-width: 300px;
   min-height: 4.75rem;
   align-items: center;
   gap: var(--spacing-3);
