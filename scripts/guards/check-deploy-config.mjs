@@ -9,7 +9,9 @@ const PRODUCTION_ORIGIN = new URL(PRODUCTION_ENDPOINT).origin;
 
 // Cloudflare's published dummy sitekeys (always pass/fail/interactive).
 const TESTING_SITEKEY = /^[123]x0{20}(AA|AB|BB|FF)$/;
-const LOOPBACK_URL = /https?:\/\/(127\.0\.0\.1|localhost)\b/;
+// A local Contact Worker endpoint; project copy may mention other local URLs.
+const LOOPBACK_URL =
+  /https?:\/\/(127\.0\.0\.1|localhost)(:\d+)?\/v1\/contact\b/;
 
 function envErrors(env) {
   const errors = [];
@@ -31,10 +33,14 @@ function artifactErrors(headers, scripts) {
     errors.push(`CSP connect-src must allow ${PRODUCTION_ORIGIN}.`);
   }
   if (scripts.some((source) => LOOPBACK_URL.test(source))) {
-    errors.push("Client bundle references a loopback URL.");
+    errors.push(
+      "Published output (bundle or page payload) references a loopback URL.",
+    );
   }
   if (!scripts.some((source) => source.includes(PRODUCTION_ENDPOINT))) {
-    errors.push("Client bundle does not contain the production endpoint.");
+    errors.push(
+      "Published output (bundle or page payload) does not contain the production endpoint.",
+    );
   }
   return errors;
 }
@@ -43,12 +49,16 @@ export function deployConfigErrors({ env, headers, scripts }) {
   return [...envErrors(env), ...artifactErrors(headers, scripts)];
 }
 
-async function scriptSources(dir) {
+// The Contact config is serialized into page HTML and RSC payload files, not
+// JS chunks, so every browser-delivered text artifact is checked.
+const PUBLIC_TEXT = /\.(js|html|txt)$/;
+
+export async function artifactSources(dir) {
   const sources = [];
   for (const entry of await readdir(dir, { withFileTypes: true })) {
     const full = path.join(dir, entry.name);
-    if (entry.isDirectory()) sources.push(...(await scriptSources(full)));
-    else if (entry.name.endsWith(".js"))
+    if (entry.isDirectory()) sources.push(...(await artifactSources(full)));
+    else if (PUBLIC_TEXT.test(entry.name))
       sources.push(await readFile(full, "utf8"));
   }
   return sources;
@@ -63,7 +73,7 @@ if (import.meta.url === pathToFileURL(process.argv[1] ?? "").href) {
   const errors = deployConfigErrors({
     env: process.env,
     headers: await readFile(path.join(out, "_headers"), "utf8"),
-    scripts: await scriptSources(path.join(out, "_next")),
+    scripts: await artifactSources(out),
   });
   if (errors.length > 0) {
     throw new Error(`Deploy configuration check failed:\n${errors.join("\n")}`);
