@@ -251,6 +251,14 @@ test("static recovery and approved project remain public", () => {
   assert.match(notFoundHtml, /href="\/#contact"/);
 });
 
+test("contact form submits natively by POST so fields never enter the URL", () => {
+  // Before hydration, or without JavaScript, the browser submits the form
+  // itself; a GET would copy name, email, and message into the query string.
+  const form = indexHtml.match(/<form[^>]*class="contact-form"[^>]*>/)?.[0];
+  assert.ok(form, "contact form missing from static homepage");
+  assert.match(form, /\smethod="post"/);
+});
+
 test("local dev cannot generate Markdown outside the public allowlist", () => {
   assert.match(nextConfigSource, /agentRules:\s*false/);
 });

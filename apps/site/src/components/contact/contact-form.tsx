@@ -69,6 +69,9 @@ export function ContactForm({ config }: { config: ContactConfig | null }) {
   return (
     <form
       className="contact-form"
+      // Native submission (before hydration or without JavaScript) must not
+      // copy personal details into the URL; POST keeps them in the body.
+      method="post"
       aria-describedby="contact-required"
       noValidate
       ref={form.formRef}
