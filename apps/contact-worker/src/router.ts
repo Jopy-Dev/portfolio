@@ -156,7 +156,21 @@ function readableBy(ctx: Context, response: Response): Response {
   return response;
 }
 
+// Same policy as the site: no includeSubDomains, because the zone apex hosts
+// other services that must not be pinned by this Worker.
+const STRICT_TRANSPORT_SECURITY = "max-age=31536000";
+
 export async function handleRequest(
+  request: Request,
+  env: Env,
+  deps: RequestDeps,
+): Promise<Response> {
+  const response = await route(request, env, deps);
+  response.headers.set("Strict-Transport-Security", STRICT_TRANSPORT_SECURITY);
+  return response;
+}
+
+async function route(
   request: Request,
   env: Env,
   deps: RequestDeps,
