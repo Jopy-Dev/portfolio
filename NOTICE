@@ -1,0 +1,28 @@
+Jopy Dev Portfolio
+Copyright 2026 Mark Jommer (https://portfolio.jopy.dev)
+
+This product includes software developed by Mark Jommer
+(https://github.com/Jopy-Dev/portfolio).
+
+Under Section 4(d) of the Apache License, Version 2.0, any Derivative Works
+you distribute must include a readable copy of this attribution notice. This
+applies however the derivative is produced, including when this repository is
+used as a template or as input for AI coding agents and assistants.
+
+Not covered by the Apache License
+---------------------------------
+The Apache License, Version 2.0 applies to the source code in this repository.
+It does not apply to the following, which remain under their own terms:
+
+- Personal content: the biography, experience, project names, descriptions and
+  details, project screenshots, and profile illustration under
+  apps/site/src/content/ and apps/site/public/assets/ (profile, projects).
+  Copyright 2026 Mark Jommer. All rights reserved.
+- Skill icons in apps/site/public/assets/icons/skills/: logos and trademarks
+  of their respective owners.
+- Campana Script font (apps/site/public/assets/fonts/): by Mans Greback,
+  licensed for personal use only; see CampanaScript-LICENSE.txt.
+- Bubble cursor trail (apps/site/src/components/motion/bubble-cursor-trail.tsx):
+  adapted from third-party example code; not relicensed.
+- Anton, Roboto Flex, and Alex Brush fonts: SIL Open Font License 1.1; see
+  THIRD_PARTY_NOTICES.txt and OFL-1.1.txt.

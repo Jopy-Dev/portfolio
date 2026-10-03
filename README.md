@@ -50,6 +50,12 @@ scripts/guards/     Build-time checks for tokens, environment, and output
 tests/contracts/    Build output and behavior tests
 ```
 
+## License
+
+Licensed under the [Apache License 2.0](LICENSE). © 2026 Mark Jommer.
+
+The license covers the source code. Personal content (biography, project details and images), skill icons, and third-party fonts and code keep their own terms; see [NOTICE](NOTICE). Derivative works must keep the attribution in `NOTICE`.
+
 ## Credits
 
 Font licenses are listed in `THIRD_PARTY_NOTICES.txt` and `OFL-1.1.txt`.
