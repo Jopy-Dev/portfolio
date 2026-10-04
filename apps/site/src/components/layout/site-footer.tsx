@@ -4,26 +4,44 @@ export function SiteFooter() {
   return (
     <footer className="site-footer content-shell" id="site-footer">
       <div className="site-footer__identity">
-        <strong>Jopy-Dev</strong>
+        <FooterExternalLink
+          className="site-footer__home"
+          href="https://jopy.dev"
+        >
+          Jopy-Dev
+        </FooterExternalLink>
         <span>Full-stack engineer</span>
       </div>
       <div className="site-footer__credit">
-        <FooterRepositoryLink />
+        <FooterExternalLink
+          className="site-footer__github"
+          href="https://github.com/Jopy-Dev/portfolio"
+        >
+          GitHub
+        </FooterExternalLink>
         <span>Design &amp; built by Mark Jommer</span>
       </div>
     </footer>
   );
 }
 
-function FooterRepositoryLink() {
+function FooterExternalLink({
+  className,
+  href,
+  children,
+}: {
+  className: string;
+  href: string;
+  children: string;
+}) {
   return (
     <a
-      className="site-footer__github"
-      href="https://github.com/Jopy-Dev/portfolio"
+      className={className}
+      href={href}
       target="_blank"
       rel="noopener noreferrer"
     >
-      GitHub
+      {children}
       <ArrowUpRightIcon />
       <span className="sr-only">opens in a new tab</span>
     </a>

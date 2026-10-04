@@ -146,8 +146,8 @@
 
   .hero {
     align-content: start;
-    gap: 3rem;
-    padding-top: 8.5rem;
+    gap: 1.5rem;
+    padding-top: 7rem;
   }
 
   .hero__title {
@@ -155,8 +155,16 @@
   }
 
   .hero__identity {
-    margin-top: 1.6rem;
+    margin-top: 1.25rem;
     font-size: 1rem;
+  }
+
+  .hero__action {
+    margin-top: 1.5rem;
+  }
+
+  .hero__tagline > span {
+    display: inline;
   }
 
   .liquid-button {
@@ -165,12 +173,7 @@
   }
 
   .availability {
-    align-items: flex-start;
     max-width: 19rem;
-  }
-
-  .availability span {
-    margin-top: 0.38rem;
   }
 
   .hero__proof dt {
@@ -308,7 +311,7 @@
     outline-color: Highlight;
   }
 
-  .availability span,
+  .availability > span[aria-hidden="true"],
   .particle,
   .menu-toggle span,
   .menu-toggle[aria-expanded="true"] span,

@@ -71,6 +71,14 @@
   font-size: 1.15rem;
 }
 
+.profile__copy > p:not(.profile__statement) + p {
+  margin-top: 1rem;
+}
+
+.profile__label {
+  color: var(--color-text-primary);
+}
+
 .profile__meta {
   display: grid;
   gap: 0.25rem;
@@ -88,6 +96,7 @@
 .social-links a,
 .project-detail__back,
 .project-detail__links a,
+.site-footer__home,
 .site-footer__github {
   position: relative;
   display: inline-flex;
@@ -99,6 +108,7 @@
 
 .social-links svg,
 .project-detail__links svg,
+.site-footer__home svg,
 .site-footer__github svg {
   width: 1.05rem;
   height: 1.05rem;
@@ -112,6 +122,7 @@
 
 .social-links a:is(:hover, :focus-visible) svg,
 .project-detail__links a:is(:hover, :focus-visible) svg,
+.site-footer__home:is(:hover, :focus-visible) svg,
 .site-footer__github:is(:hover, :focus-visible) svg {
   translate: 0.18rem -0.18rem;
 }
@@ -119,6 +130,7 @@
 .social-links a::after,
 .project-detail__back::after,
 .project-detail__links a::after,
+.site-footer__home::after,
 .site-footer__github::after {
   position: absolute;
   right: 0;
@@ -135,6 +147,7 @@
 .social-links a:is(:hover, :focus-visible)::after,
 .project-detail__back:is(:hover, :focus-visible)::after,
 .project-detail__links a:is(:hover, :focus-visible)::after,
+.site-footer__home:is(:hover, :focus-visible)::after,
 .site-footer__github:is(:hover, :focus-visible)::after {
   transform: scaleX(1);
   transform-origin: left;
@@ -475,12 +488,7 @@
   background: transparent;
 }
 
-.site-footer__identity strong {
-  display: block;
-  margin-bottom: 0.15rem;
-}
-
-.site-footer__identity strong,
+.site-footer__home,
 .site-footer__github {
   color: var(--color-text-primary);
   font-size: 1rem;
@@ -492,6 +500,10 @@
   flex-direction: column;
   color: var(--color-text-muted);
   font-size: 1rem;
+}
+
+.site-footer__identity {
+  align-items: flex-start;
 }
 
 .site-footer__credit {

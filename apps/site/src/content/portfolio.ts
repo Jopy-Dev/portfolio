@@ -61,10 +61,15 @@ export function getSectionNavigation(
   };
 }
 
+export const HERO_STATUS = [
+  "Open to global remote opportunities",
+  "Flexible across time zones",
+] as const;
+
 export const HERO_PROOF = [
-  { value: "5+", label: "Years of Experience" },
+  { value: "7+", label: "Years of Experience" },
   { value: "10+", label: "Completed Projects" },
-  { value: "10K+", label: "Hours Worked" },
+  { value: "12K+", label: "Hours Worked" },
 ] as const;
 
 export const EXPERIENCE = [
@@ -72,7 +77,7 @@ export const EXPERIENCE = [
     period: "Mar 2026 – Present",
     location: "Canada, Remote",
     role: "AI Automation Engineer",
-    organization: "Randstad Digital",
+    organization: "Part-time · Randstad Digital",
     summary:
       "Engineering AI-driven automation and production-grade applications with LLMs, APIs, cloud platforms, and measurable stakeholder outcomes.",
     technologies: "Claude Code · GPT Codex · Kimi AI",
@@ -81,7 +86,7 @@ export const EXPERIENCE = [
     period: "Oct 2020 – Present",
     location: "Hybrid",
     role: "Full Stack Web Developer",
-    organization: "Freelance · Business Client",
+    organization: "Part-time · Business Client",
     summary:
       "Delivering scalable web applications, low-latency backend infrastructure, automated workflows, and secure RBAC architecture supporting 10K+ users.",
     technologies: "HTML · CSS · JavaScript · TypeScript · Node.js · Ubuntu LTS",
@@ -90,7 +95,7 @@ export const EXPERIENCE = [
     period: "Jan 2018 – Feb 2026",
     location: "Onsite",
     role: "Software Consultant",
-    organization: "Qwaider Group of Companies",
+    organization: "Full-time · Qwaider Group of Companies",
     summary:
       "Led technical discovery and feasibility assessments to deliver complex software designs within company budgets and project timelines.",
     technologies: "C# · Visual Basic · Python · SQL",

@@ -14,18 +14,35 @@ export function ProfileSection() {
       <div className="profile__grid">
         <div className="profile__copy">
           <p className="profile__statement">
-            Full-stack engineer building production-grade web applications,
-            secure backend systems, and AI-driven automation.
+            Full-stack engineer who ships TypeScript web apps to production —
+            and keeps them secure.
           </p>
           <p>
-            Experienced in developing production-ready applications,
-            architecting backend services, implementing secure authentication
-            and authorization, designing reusable frontend systems, and
-            delivering reliable, cloud-ready solutions. Adept at translating
-            complex business requirements into scalable, user-focused software
-            while following industry best practices and Agile methodologies.
+            I've built software professionally for 7+ years — as a software
+            consultant working in C#, Python, and SQL, and since 2020 as a
+            freelance full-stack developer shipping Next.js, React, and Node.js
+            apps. Recent work includes TopSpin, a competitive tennis platform
+            with Glicko-2 rankings, verified match results, and moderated
+            tournaments, and a bilingual (EN/FR) training platform for Durable
+            Impact Academy.
+          </p>
+          <p>
+            I care about the parts users never see: role-based access control,
+            authentication, input validation, and deploys that don't break. This
+            site runs on Cloudflare Workers with a rate-limited, bot-protected
+            contact service behind protected-branch CI.
+          </p>
+          <p>
+            Today I build AI automation at Randstad Digital. I use AI coding
+            tools daily, with tests and code review as the guardrail, not the
+            replacement.
+          </p>
+          <p>
+            <span className="profile__label">Looking for:</span> a mid-level
+            full-stack role on a product team shipping TypeScript.
           </p>
           <nav className="social-links" aria-label="Professional profiles">
+            <ExternalProfile href="https://jopy.dev">Website</ExternalProfile>
             <ExternalProfile href="https://github.com/Jopy-Dev">
               GitHub
             </ExternalProfile>
