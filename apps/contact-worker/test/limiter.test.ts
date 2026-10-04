@@ -11,13 +11,17 @@ import {
   validSubmission,
 } from "./helpers.ts";
 
-function attempt(ip: string | null) {
+function attempt(ip: string | null, now: () => number = Date.now) {
   const headers: Record<string, string> = {
     Origin: ORIGIN,
     "Content-Type": "application/json",
   };
   if (ip !== null) headers["CF-Connecting-IP"] = ip;
-  return call(new Request(ENDPOINT, { method: "POST", body: "{}", headers }));
+  return call(
+    new Request(ENDPOINT, { method: "POST", body: "{}", headers }),
+    {},
+    { now },
+  );
 }
 
 describe("limiter failure", () => {
@@ -64,11 +68,14 @@ describe("limiter failure", () => {
 
 describe("rate limiting", () => {
   it("answers the sixth attempt from one client with 429 and Retry-After", async () => {
+    // A frozen clock keeps Retry-After exact however slow the test runner is.
     const ip = uniqueIp();
+    const frozen = Date.now();
+    const now = () => frozen;
     for (let i = 0; i < 5; i++) {
-      expect((await attempt(ip)).status).not.toBe(429);
+      expect((await attempt(ip, now)).status).not.toBe(429);
     }
-    const response = await attempt(ip);
+    const response = await attempt(ip, now);
     expect(response.status).toBe(429);
     expect(response.headers.get("Retry-After")).toBe("600");
     expect(response.headers.get("Access-Control-Allow-Origin")).toBe(ORIGIN);
@@ -77,5 +84,18 @@ describe("rate limiting", () => {
       code: "rate_limited",
       retryAfterSeconds: 600,
     });
+  });
+
+  it("counts Retry-After down from the oldest attempt in the window", async () => {
+    const ip = uniqueIp();
+    let clock = Date.now();
+    const now = () => clock;
+    for (let i = 0; i < 5; i++) {
+      expect((await attempt(ip, now)).status).not.toBe(429);
+    }
+    clock += 1_500;
+    const response = await attempt(ip, now);
+    expect(response.status).toBe(429);
+    expect(response.headers.get("Retry-After")).toBe("599");
   });
 });
