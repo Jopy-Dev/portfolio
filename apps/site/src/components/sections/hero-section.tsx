@@ -1,6 +1,6 @@
 import { HeroArrow } from "@/components/motion/hero-arrow";
 import { LiquidLink } from "@/components/ui/liquid-link";
-import { HERO_PROOF } from "@/content/portfolio";
+import { HERO_PROOF, HERO_STATUS } from "@/content/portfolio";
 
 export function HeroSection() {
   return (
@@ -23,9 +23,12 @@ function HeroIdentity() {
   return (
     <div className="hero__identity">
       <strong>Mark Jommer</strong>
-      <span>AI Automation Engineer</span>
-      <span>Passionate about AI-Assisted Development,</span>
-      <span>leveraging AI-powered tools and large language models (LLMs)</span>
+      <span>TypeScript · React / Next.js · Node.js · PostgreSQL</span>
+      <span className="hero__tagline">
+        <span>I build and ship web apps end to end — database,</span>{" "}
+        <span>auth, API, and the UI people actually use.</span>
+      </span>
+      <span>Based in Metro Manila, PH (GMT+8)</span>
     </div>
   );
 }
@@ -33,13 +36,17 @@ function HeroIdentity() {
 function HeroAction() {
   return (
     <div className="hero__action">
+      <p className="availability">
+        <span aria-hidden="true" />
+        <span className="availability__text">
+          {HERO_STATUS.map((status) => (
+            <span key={status}>{status}</span>
+          ))}
+        </span>
+      </p>
       <LiquidLink href="#contact" hoverLabel="Contact me">
         Contact
       </LiquidLink>
-      <p className="availability">
-        <span aria-hidden="true" />
-        Available for full-time opportunities
-      </p>
     </div>
   );
 }

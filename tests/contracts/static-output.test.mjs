@@ -241,11 +241,24 @@ test("static recovery and approved project remain public", () => {
     indexHtml,
     /Selected work will appear here after review\./,
   );
-  assert.match(indexHtml, /Available for full-time opportunities/);
   const hero = indexHtml.match(
     /<section[^>]*id="hero"[\s\S]*?<\/section>/,
   )?.[0];
   assert.ok(hero);
+  assert.match(
+    hero,
+    /<div class="hero__action"><p class="availability"><span aria-hidden="true"><\/span><span class="availability__text"><span>Open to global remote opportunities<\/span><span>Flexible across time zones<\/span><\/span><\/p><a class="liquid-button"/,
+  );
+  assert.doesNotMatch(hero, /Available for full-time opportunities/);
+  assert.match(
+    hero,
+    /<span class="hero__tagline"><span>I build and ship web apps end to end — database,<\/span> <span>auth, API, and the UI people actually use\.<\/span><\/span>/,
+  );
+  assert.match(hero, /Based in Metro Manila, PH \(GMT\+8\)/);
+  assert.match(
+    indexHtml,
+    /<p><span class="profile__label">Looking for:<\/span> a mid-level full-stack role/,
+  );
   assert.doesNotMatch(hero, /href="#projects"/);
   assert.match(notFoundHtml, /href="\/"/);
   assert.match(notFoundHtml, /href="\/#contact"/);
@@ -727,8 +740,21 @@ test("public metadata uses the portfolio.jopy.dev canonical origin", async () =>
   assert.ok(robots.includes(`Sitemap: ${origin}/sitemap.xml`));
   assert.ok(robots.includes(`Host: ${origin}`));
   assert.ok(sitemap.includes(`<loc>${origin}/</loc>`));
+  // The apex site appears only as outbound new-tab links (Profile Website +
+  // footer Jopy-Dev); head metadata and structured data must never use it.
+  const head = indexHtml.match(/<head>[\s\S]*?<\/head>/)?.[0];
+  const structuredData = [
+    ...indexHtml.matchAll(
+      /<script type="application\/ld\+json">([\s\S]*?)<\/script>/g,
+    ),
+  ].map((match) => match[1]);
+  assert.ok(head, "document head must exist");
+  assert.equal(structuredData.length, 1);
+  const apexLinks =
+    /<a (?:class="site-footer__home" )?href="https:\/\/jopy\.dev" target="_blank" rel="(?:noreferrer|noopener noreferrer)">/g;
+  assert.equal(indexHtml.match(apexLinks)?.length, 2);
   assert.doesNotMatch(
-    `${indexHtml}${robots}${sitemap}`,
+    `${head}${structuredData.join("")}${robots}${sitemap}`,
     /https:\/\/jopy\.dev/,
     "bare apex origin must not appear in public metadata",
   );

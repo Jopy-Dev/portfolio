@@ -246,9 +246,10 @@ assertArray(menuHrefs, expectedHrefs, "homepage navigation order");
 assertIncludes(index, 'href="/projects/topspin/"', "approved TopSpin project");
 assertIncludes(
   index,
-  "Available for full-time opportunities",
+  "Open to global remote opportunities",
   "Hero availability status",
 );
+assertIncludes(index, "Flexible across time zones", "Hero time-zone status");
 assertIncludes(index, 'data-wordmark-visible="true"', "wordmark clear state");
 assertIncludes(
   index,

@@ -246,6 +246,21 @@ test("footer shows the exact design credit", () => {
   assert.doesNotMatch(indexHtml, /© 2026 Jopy-Dev/);
 });
 
+test("footer Jopy-Dev links to jopy.dev with the GitHub link treatment", () => {
+  assert.match(
+    indexHtml,
+    /<a class="site-footer__home" href="https:\/\/jopy\.dev" target="_blank" rel="noopener noreferrer">Jopy-Dev<svg/,
+  );
+  for (const state of [
+    /\.site-footer__home,\s*\.site-footer__github \{\s*position: relative;/,
+    /\.site-footer__home svg,\s*\.site-footer__github svg \{/,
+    /\.site-footer__home::after,\s*\.site-footer__github::after \{/,
+    /\.site-footer__home:is\(:hover, :focus-visible\)::after,\s*\.site-footer__github:is\(:hover, :focus-visible\)::after \{/,
+  ]) {
+    assert.match(sectionStyles, state);
+  }
+});
+
 test("project-link icon draws once per hover or focus activation", () => {
   assert.match(sectionStyles, /\.project-row svg path/);
   assert.match(sectionStyles, /stroke-dasharray:/);
