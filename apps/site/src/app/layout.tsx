@@ -5,9 +5,9 @@ import { PageTransition } from "@/components/motion/page-transition";
 import { SITE_ORIGIN } from "@/lib/site";
 import "./globals.css";
 
-const SITE_TITLE = "Mark Jommer | Full-stack Engineer & AI Automation Engineer";
+const SITE_TITLE = "Mark Jommer | Full-stack TypeScript Engineer";
 const SITE_DESCRIPTION =
-  "Full-stack engineer in Metro Manila building production-grade web applications, secure backend systems, and AI-driven automation.";
+  "Full-stack engineer in Metro Manila (GMT+8) shipping secure TypeScript web apps with React, Next.js, Node.js, and PostgreSQL. Open to global remote work.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_ORIGIN),
