@@ -641,12 +641,12 @@ assertIncludes(notFound, 'href="/"', "404 Home recovery");
 assertIncludes(notFound, 'href="/#contact"', "404 Contact recovery");
 assertIncludes(
   index,
-  "Mark Jommer | Full-stack Engineer &amp; AI Automation Engineer",
+  "<title>Mark Jommer | Full-stack TypeScript Engineer</title>",
   "exact title",
 );
 assertIncludes(
   index,
-  "Full-stack engineer in Metro Manila building production-grade web applications, secure backend systems, and AI-driven automation.",
+  "Full-stack engineer in Metro Manila (GMT+8) shipping secure TypeScript web apps with React, Next.js, Node.js, and PostgreSQL. Open to global remote work.",
   "exact description",
 );
 

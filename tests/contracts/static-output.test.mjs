@@ -723,6 +723,24 @@ test("project preview choices and renamed route metadata stay in sync", async ()
   );
 });
 
+test("homepage title and description lead with web engineering", () => {
+  const title = "Mark Jommer | Full-stack TypeScript Engineer";
+  const description =
+    "Full-stack engineer in Metro Manila (GMT+8) shipping secure TypeScript web apps with React, Next.js, Node.js, and PostgreSQL. Open to global remote work.";
+  assert.ok(description.length <= 155, "description fits search snippet");
+  assert.ok(indexHtml.includes(`<title>${title}</title>`));
+  for (const tag of [
+    `<meta name="description" content="${description}"/>`,
+    `<meta property="og:title" content="${title}"/>`,
+    `<meta property="og:description" content="${description}"/>`,
+    `<meta name="twitter:title" content="${title}"/>`,
+    `<meta name="twitter:description" content="${description}"/>`,
+  ]) {
+    assert.ok(indexHtml.includes(tag), tag);
+  }
+  assert.doesNotMatch(indexHtml, /AI Automation Engineer<\/title>/);
+});
+
 test("public metadata uses the portfolio.jopy.dev canonical origin", async () => {
   const origin = "https://portfolio.jopy.dev";
   const [robots, sitemap] = await Promise.all([
