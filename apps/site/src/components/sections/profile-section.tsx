@@ -18,19 +18,23 @@ export function ProfileSection() {
             and keeps them secure.
           </p>
           <p>
-            I've built software professionally for 7+ years — as a software
-            consultant working in C#, Python, and SQL, and since 2020 as a
-            freelance full-stack developer shipping Next.js, React, and Node.js
-            apps. Recent work includes TopSpin, a competitive tennis platform
-            with Glicko-2 rankings, verified match results, and moderated
+            I've been building software professionally for 7+ years, including
+            6+ years focused on web development with TypeScript, React, Next.js,
+            and Node.js. I've built and shipped production applications end to
+            end, from database design and APIs to authentication, authorization,
+            and the frontend users interact with.
+          </p>
+          <p>
+            Recent work includes TopSpin, a competitive tennis platform with
+            Glicko-2 rankings, verified match results, and moderated
             tournaments, and a bilingual (EN/FR) training platform for Durable
             Impact Academy.
           </p>
           <p>
             I care about the parts users never see: role-based access control,
-            authentication, input validation, and deploys that don't break. This
-            site runs on Cloudflare Workers with a rate-limited, bot-protected
-            contact service behind protected-branch CI.
+            authentication, input validation, and deploys that don't break. I
+            build with maintainability and production reliability in mind rather
+            than treating the framework as the product.
           </p>
           <p>
             Today I build AI automation at Randstad Digital. I use AI coding
@@ -38,7 +42,7 @@ export function ProfileSection() {
             replacement.
           </p>
           <p>
-            <span className="profile__label">Looking for:</span> a mid-level
+            <span className="profile__label">Looking for:</span> A mid-level
             full-stack role on a product team shipping TypeScript.
           </p>
           <nav className="social-links" aria-label="Professional profiles">

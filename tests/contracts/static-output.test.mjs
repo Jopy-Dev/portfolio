@@ -257,8 +257,13 @@ test("static recovery and approved project remain public", () => {
   assert.match(hero, /Based in Metro Manila, PH \(GMT\+8\)/);
   assert.match(
     indexHtml,
-    /<p><span class="profile__label">Looking for:<\/span> a mid-level full-stack role/,
+    /<p><span class="profile__label">Looking for:<\/span> A mid-level full-stack role/,
   );
+  assert.match(
+    indexHtml,
+    /<p>I(?:&#x27;|')ve been building software professionally for 7\+ years, including 6\+ years focused on web development/,
+  );
+  assert.doesNotMatch(indexHtml, /This site runs on Cloudflare Workers/);
   assert.doesNotMatch(hero, /href="#projects"/);
   assert.match(notFoundHtml, /href="\/"/);
   assert.match(notFoundHtml, /href="\/#contact"/);
