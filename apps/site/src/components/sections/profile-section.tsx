@@ -14,7 +14,7 @@ export function ProfileSection() {
       <div className="profile__grid">
         <div className="profile__copy">
           <p className="profile__statement">
-            Full-stack engineer who ships TypeScript web apps to production —
+            Full-stack developer who ships TypeScript web apps to production —
             and keeps them secure.
           </p>
           <p>

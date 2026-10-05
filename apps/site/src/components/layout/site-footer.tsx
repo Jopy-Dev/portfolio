@@ -10,7 +10,7 @@ export function SiteFooter() {
         >
           Jopy-Dev
         </FooterExternalLink>
-        <span>Full-stack engineer</span>
+        <span>Full-stack developer</span>
       </div>
       <div className="site-footer__credit">
         <FooterExternalLink

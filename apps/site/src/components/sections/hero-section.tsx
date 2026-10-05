@@ -9,7 +9,7 @@ export function HeroSection() {
       <div className="hero__content">
         <h1 className="hero__title" id="hero-title">
           <span>Full-stack</span>
-          <span>Engineer</span>
+          <span>Developer</span>
         </h1>
         <HeroIdentity />
         <HeroAction />
