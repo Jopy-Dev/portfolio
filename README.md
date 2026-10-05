@@ -2,7 +2,7 @@
 
 Type: web app — class: full-product
 
-Personal portfolio of Mark Jommer, Full-stack Engineer, built for [portfolio.jopy.dev](https://portfolio.jopy.dev). A statically exported Next.js site with an editorial layout, scroll-driven motion, and a dedicated page for each featured project.
+Personal portfolio of Mark Jommer, Full-stack Developer, built for [portfolio.jopy.dev](https://portfolio.jopy.dev). A statically exported Next.js site with an editorial layout, scroll-driven motion, and a dedicated page for each featured project.
 
 ## Tech Stack
 
