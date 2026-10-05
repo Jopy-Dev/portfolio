@@ -729,9 +729,9 @@ test("project preview choices and renamed route metadata stay in sync", async ()
 });
 
 test("homepage title and description lead with web engineering", () => {
-  const title = "Mark Jommer | Full-stack TypeScript Engineer";
+  const title = "Mark Jommer | Full-stack TypeScript Developer";
   const description =
-    "Full-stack engineer in Metro Manila (GMT+8) shipping secure TypeScript web apps with React, Next.js, Node.js, and PostgreSQL. Open to global remote work.";
+    "Full-stack developer in Metro Manila (GMT+8) shipping secure TypeScript web apps with React, Next.js, Node.js, and PostgreSQL. Open to global remote work.";
   assert.ok(description.length <= 155, "description fits search snippet");
   assert.ok(indexHtml.includes(`<title>${title}</title>`));
   for (const tag of [
@@ -744,6 +744,10 @@ test("homepage title and description lead with web engineering", () => {
     assert.ok(indexHtml.includes(tag), tag);
   }
   assert.doesNotMatch(indexHtml, /AI Automation Engineer<\/title>/);
+  assert.ok(
+    indexHtml.includes('"jobTitle":"Full-stack Developer"'),
+    "structured data job title",
+  );
 });
 
 test("public metadata uses the portfolio.jopy.dev canonical origin", async () => {

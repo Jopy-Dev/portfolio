@@ -16,7 +16,7 @@ const personJsonLd = {
   "@type": "Person",
   name: "Mark Jommer",
   url: SITE_ORIGIN,
-  jobTitle: "Full-stack Engineer",
+  jobTitle: "Full-stack Developer",
   address: {
     "@type": "PostalAddress",
     addressLocality: "Metro Manila",
